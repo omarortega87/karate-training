@@ -2,14 +2,10 @@
 Feature: Testing Articles Addition and Delete
 
     Background: Define URL
-    * url 'https://conduit.productionready.io/api'
-    Given path 'users/login'
-    And request {user: {email: "Karate1", password: "Karate123"}}
-    When method Post
-    Then status 200
+    * def tokenResponse = callonce read('classpath:helpers/CreateToken.feature') {email: "karate1", password: "karate123"}
     * def token = response.user.token
 
-
+ 
     Scenario: Adding an Article
     Given header Authorization = 'Token ' + token
     Given path 'articles'
